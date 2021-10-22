@@ -9,11 +9,15 @@ public class LeapYear {
     private static void checkLeapYear(int year) {
         if (isLeapYear(year)) {
             System.out.printf("%d is a leap year.\n", year);
-        } else {
+        } else { 
             System.out.printf("%d is not a leap year.\n", year);
         }
     }
-
+    public static boolean isLeapYear(int year){
+        if(year % 400 == 0 || (year % 4 ==0 && year % 100 != 0)){
+            return true;
+        }else return false;
+    }
     /** Must be provided an integer as a command line argument ARGS. */
     public static void main(String[] args) {
         if (args.length < 1) {
@@ -30,4 +34,3 @@ public class LeapYear {
         }
     }
 }
-
