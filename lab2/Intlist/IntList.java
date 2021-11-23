@@ -15,6 +15,7 @@ public class IntList {
     /**
      * Remaining elements of list.
      */
+    in
     public IntList rest;
 
     /**
