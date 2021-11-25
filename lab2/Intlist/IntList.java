@@ -15,7 +15,7 @@ public class IntList {
     /**
      * Remaining elements of list.
      */
-    in
+
     public IntList rest;
 
     /**
@@ -83,17 +83,41 @@ public class IntList {
 
     public static IntList dcatenate(IntList A, IntList B) {
         //TODO:  fill in method
-        return null;
-    }
+        if (A == null) {
+            return B;
+        }
+//        IntList p=A;
+//        while (p.rest!=null){
+//            p= p.rest;
+//        }
+//        p.rest =B;
+//        return A;
+//    }
+        A.rest = dcatenate(A.rest, B);
+        return A;
 
+    }
     /**
      * Returns a list consisting of the elements of A followed by the
      * * elements of B.  May NOT modify items of A.  Use 'new'.
      */
     public static IntList catenate(IntList A, IntList B) {
         //TODO:  fill in method
-        return null;
-    }
+        if (A == null) {
+            return B;}
+            IntList C = new IntList(A.first,null);
+//            IntList p =C;
+//            while (A.rest!=null){
+//                A=A.rest;
+//                p.rest = new IntList(A.first,null);
+//                p=p.rest;
+//            }
+//            p.rest=B;
+//            return C;
+//    }
+        C.rest=catenate(A.rest,B);
+        return C;}
+
 
 
 
