@@ -90,7 +90,8 @@ public class LinkedListDeque<T> {
             return null;
         }
         IntNode p = sentinel.next;
-        for (int i = 0; i == index; p = p.next) {
+        for (int i = 0; i < index; p = p.next) {
+            i=i+1;
         }
         return p.item;
 
@@ -100,7 +101,7 @@ public class LinkedListDeque<T> {
         if (size < index || index < 0 || isEmpty()) {
             return null;
         }
-        return getRecursive(sentinel.next, index--);
+        return getRecursive(sentinel.next, index);
     }
 
     public T getRecursive(LinkedListDeque<T>.IntNode node, int index) {
