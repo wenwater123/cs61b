@@ -1,18 +1,6 @@
 public class LinkedListDeque<T> {
-    private IntNode sentinel;
+    private final IntNode sentinel;
     private int size;
-
-    public class IntNode {
-        public IntNode pre;
-        public T item;
-        public IntNode next;
-
-        public IntNode(LinkedListDeque<T>.IntNode pre, T item, LinkedListDeque<T>.IntNode next) {
-            this.pre = pre;
-            this.item = item;
-            this.next = next;
-        }
-    }
 
     public LinkedListDeque() {
         sentinel = new IntNode(null, (T) new Object(), null);
@@ -42,11 +30,7 @@ public class LinkedListDeque<T> {
     }
 
     public boolean isEmpty() {
-        if (size == 0) {
-            return true;
-        } else {
-            return false;
-        }
+        return size == 0;
     }
 
     public int size() {
@@ -91,7 +75,7 @@ public class LinkedListDeque<T> {
         }
         IntNode p = sentinel.next;
         for (int i = 0; i < index; p = p.next) {
-            i=i+1;
+            i = i + 1;
         }
         return p.item;
 
@@ -108,7 +92,19 @@ public class LinkedListDeque<T> {
         if (index == 0) {
             return node.item;
         }
-        return getRecursive(node.next, index-1);
+        return getRecursive(node.next, index - 1);
+    }
+
+    public class IntNode {
+        public IntNode pre;
+        public T item;
+        public IntNode next;
+
+        public IntNode(LinkedListDeque<T>.IntNode pre, T item, LinkedListDeque<T>.IntNode next) {
+            this.pre = pre;
+            this.item = item;
+            this.next = next;
+        }
     }
 
 }

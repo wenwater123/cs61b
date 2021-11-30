@@ -4,7 +4,7 @@ public class ArrayDeque<T> {
     private int nextFirst;
     private int nextLast;
     private int capacity = 8;
-    private int RFACTOR = 2;
+    private final int RFACTOR = 2;
 
     public ArrayDeque() {
         items = (T[]) new Object[capacity];
@@ -33,19 +33,11 @@ public class ArrayDeque<T> {
     }
 
     public boolean isEmpty() {
-        if (size == 0) {
-            return true;
-        } else {
-            return false;
-        }
+        return size == 0;
     }
 
     public boolean isfull() {
-        if (size == capacity - 1) {
-            return true;
-        } else {
-            return false;
-        }
+        return size == capacity - 1;
     }
 
     public int size() {
@@ -90,20 +82,23 @@ public class ArrayDeque<T> {
     }
 
     private void resize(int newSize) {
-        T[] neritems = (T[]) new Object[newSize];
+        T[] newitem = (T[]) new Object[newSize];
 
         if (nextLast > nextFirst) {
             int length = nextLast - nextFirst - 1;
-            System.arraycopy(items, nextFirst + 1, neritems, nextFirst + 1, length);
+            System.arraycopy(items, nextFirst + 1, newitem, 1, length);
+            nextFirst = 0;
+            nextLast = length;
         } else {
-            int length1 = capacity - nextFirst;
+            int length1 = capacity - nextFirst - 1;
             int length2 = nextLast;
-            System.arraycopy(items, nextFirst + 1, neritems, nextFirst + 1, length1);
-            System.arraycopy(items, 0, neritems, nextFirst + 1 + length1, length2);
-            nextLast = nextFirst + 1 + capacity;
+            System.arraycopy(items, nextFirst + 1, newitem, 1, length1);
+            System.arraycopy(items, 0, newitem, length1 + 1, length2);
+            nextLast = length1 + length2;
+            nextFirst = 0;
         }
         capacity = newSize;
-        items = neritems;
+        items = newitem;
     }
 
 
