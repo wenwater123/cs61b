@@ -108,7 +108,7 @@ public class LinkedListDeque<T> {
         if (index == 0) {
             return node.item;
         }
-        return getRecursive(node.next, index--);
+        return getRecursive(node.next, index-1);
     }
 
 }
