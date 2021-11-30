@@ -4,7 +4,7 @@ public class ArrayDeque<T> {
     private int nextFirst;
     private int nextLast;
     private int capacity = 8;
-    private final int RFACTOR = 2;
+    private final int bigRFACTOR = 2;
 
     public ArrayDeque() {
         items = (T[]) new Object[capacity];
@@ -15,7 +15,7 @@ public class ArrayDeque<T> {
 
     public void addFirst(T item) {
         if (isfull()) {
-            resize(size * RFACTOR);
+            resize(capacity * bigRFACTOR);
         }
         items[nextLast] = item;
         nextLast = (nextLast + 1) % items.length;
@@ -25,7 +25,7 @@ public class ArrayDeque<T> {
 
     public void addLast(T item) {
         if (isfull()) {
-            resize(size * RFACTOR);
+            resize(capacity * bigRFACTOR);
         }
         items[nextFirst] = item;
         nextFirst = (nextFirst - 1 + items.length) % items.length;
@@ -55,6 +55,10 @@ public class ArrayDeque<T> {
     }
 
     public T removeFirst() {
+        double radio = capacity / size;
+        if (radio < 0.25) {
+            resize(capacity / 2);
+        }
         if (isEmpty()) {
             return null;
         }
@@ -65,6 +69,10 @@ public class ArrayDeque<T> {
     }
 
     public T removeLast() {
+        double radio = capacity / size;
+        if (radio < 0.25) {
+            resize(capacity / 2);
+        }
         if (isEmpty()) {
             return null;
         }
@@ -80,6 +88,7 @@ public class ArrayDeque<T> {
         }
         return items[(nextFirst + index + 1) % capacity];
     }
+
 
     private void resize(int newSize) {
         T[] newitem = (T[]) new Object[newSize];
