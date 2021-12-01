@@ -17,18 +17,17 @@ public class ArrayDeque<T> {
         if (isfull()) {
             resize(capacity * bigRFACTOR);
         }
-        items[nextLast] = item;
-        nextLast = (nextLast + 1) % items.length;
-        size++;
-
+        items[nextFirst] = item;
+        nextFirst = (nextFirst - 1 + items.length) % items.length;
+        size+=1;
     }
 
     public void addLast(T item) {
         if (isfull()) {
             resize(capacity * bigRFACTOR);
         }
-        items[nextFirst] = item;
-        nextFirst = (nextFirst - 1 + items.length) % items.length;
+        items[nextLast] = item;
+        nextLast = (nextLast + 1) % items.length;
         size+=1;
     }
 
