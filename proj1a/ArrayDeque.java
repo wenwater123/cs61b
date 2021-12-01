@@ -54,7 +54,7 @@ public class ArrayDeque<T> {
     }
 
     public T removeFirst() {
-        double radio = capacity / size;
+        double radio = size/capacity;
         if (radio < 0.25) {
             resize(capacity / 2);
         }
@@ -69,7 +69,7 @@ public class ArrayDeque<T> {
     }
 
     public T removeLast() {
-        double radio = capacity / size;
+        double radio = size/capacity;
         if (radio < 0.25) {
             resize(capacity / 2);
         }
