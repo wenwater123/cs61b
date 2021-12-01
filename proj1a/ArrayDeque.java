@@ -55,8 +55,9 @@ public class ArrayDeque<T> {
 
     public T removeFirst() {
         double radio = size/capacity;
-        if (radio < 0.25) {
-            resize(capacity / 2);
+        if (capacity>16 && radio < 0.25) {
+            int newcapcity = capacity / 2;
+            resize(newcapcity);
         }
         if (isEmpty()) {
             return null;
@@ -70,8 +71,9 @@ public class ArrayDeque<T> {
 
     public T removeLast() {
         double radio = size/capacity;
-        if (radio < 0.25) {
-            resize(capacity / 2);
+        if (capacity>16 &&radio < 0.25) {
+            int newcapcity = capacity / 2;
+            resize(newcapcity);
         }
         if (isEmpty()) {
             return null;
@@ -98,13 +100,13 @@ public class ArrayDeque<T> {
             int length = nextLast - nextFirst - 1;
             System.arraycopy(items, nextFirst + 1, newitem, 1, length);
             nextFirst = 0;
-            nextLast = length;
+            nextLast = length+1;
         } else {
             int length1 = capacity - nextFirst - 1;
             int length2 = nextLast;
             System.arraycopy(items, nextFirst + 1, newitem, 1, length1);
             System.arraycopy(items, 0, newitem, length1 + 1, length2);
-            nextLast = length1 + length2;
+            nextLast = length1 + length2+1;
             nextFirst = 0;
         }
         capacity = newSize;
