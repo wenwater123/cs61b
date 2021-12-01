@@ -29,7 +29,7 @@ public class ArrayDeque<T> {
         }
         items[nextFirst] = item;
         nextFirst = (nextFirst - 1 + items.length) % items.length;
-        size++;
+        size+=1;
     }
 
     public boolean isEmpty() {
