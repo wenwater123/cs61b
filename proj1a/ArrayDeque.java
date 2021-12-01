@@ -15,7 +15,8 @@ public class ArrayDeque<T> {
 
     public void addFirst(T item) {
         if (isfull()) {
-            resize(capacity * bigRFACTOR);
+            int newcap = capacity * bigRFACTOR;
+            resize(newcap);
         }
         items[nextFirst] = item;
         nextFirst = (nextFirst - 1 + items.length) % items.length;
@@ -24,7 +25,8 @@ public class ArrayDeque<T> {
 
     public void addLast(T item) {
         if (isfull()) {
-            resize(capacity * bigRFACTOR);
+            int newcap = capacity * bigRFACTOR;
+            resize(newcap);
         }
         items[nextLast] = item;
         nextLast = (nextLast + 1) % items.length;
