@@ -61,8 +61,9 @@ public class ArrayDeque<T> {
         if (isEmpty()) {
             return null;
         }
-        T res = items[(nextLast - 1 + items.length) % capacity];
-        nextLast = (nextLast - 1 + items.length) % capacity;
+        T res = items[(nextFirst + 1) % capacity];
+        items [(nextFirst + 1) % capacity]=null;
+        nextFirst = (nextFirst + 1 + items.length) % capacity;
         size--;
         return res;
     }
@@ -75,8 +76,9 @@ public class ArrayDeque<T> {
         if (isEmpty()) {
             return null;
         }
-        T res = items[(nextFirst + 1) % capacity];
-        nextLast = (nextFirst - 1 + items.length) % capacity;
+        T res = items[(nextLast - 1 + items.length) % capacity];
+        items [(nextLast - 1 + items.length) % capacity]=null;
+        nextLast = (nextLast - 1 + items.length) % capacity;
         size--;
         return res;
     }
