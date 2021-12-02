@@ -14,30 +14,30 @@ public class ArrayDeque<T> {
     }
 
     public void addFirst(T item) {
+        items[nextFirst] = item;
+        nextFirst = (nextFirst - 1 + items.length) % items.length;
+        size += 1;
         if (isfull()) {
             int newcap = capacity * bigRFACTOR;
             resize(newcap);
         }
-        items[nextFirst] = item;
-        nextFirst = (nextFirst - 1 + items.length) % items.length;
-        size+=1;
     }
 
     public void addLast(T item) {
+        items[nextLast] = item;
+        nextLast = (nextLast + 1) % items.length;
+        size += 1;
         if (isfull()) {
             int newcap = capacity * bigRFACTOR;
             resize(newcap);
         }
-        items[nextLast] = item;
-        nextLast = (nextLast + 1) % items.length;
-        size+=1;
     }
 
     public boolean isEmpty() {
         return size == 0;
     }
 
-    public boolean isfull() {
+    private boolean isfull() {
         return size == capacity - 1;
     }
 
@@ -56,34 +56,34 @@ public class ArrayDeque<T> {
     }
 
     public T removeFirst() {
-        double radio = size/capacity;
-        if (capacity>16 && radio < 0.25) {
-            int newcapcity = capacity / 2;
-            resize(newcapcity);
-        }
         if (isEmpty()) {
             return null;
         }
         T res = items[(nextFirst + 1) % capacity];
-        items [(nextFirst + 1) % capacity]=null;
+        items[(nextFirst + 1) % capacity] = null;
         nextFirst = (nextFirst + 1 + items.length) % capacity;
         size--;
+        double radio = size / capacity;
+        if (capacity > 16 && radio < 0.25) {
+            int newcapcity = capacity / 2;
+            resize(newcapcity);
+        }
         return res;
     }
 
     public T removeLast() {
-        double radio = size/capacity;
-        if (capacity>16 &&radio < 0.25) {
-            int newcapcity = capacity / 2;
-            resize(newcapcity);
-        }
         if (isEmpty()) {
             return null;
         }
         T res = items[(nextLast - 1 + items.length) % capacity];
-        items [(nextLast - 1 + items.length) % capacity]=null;
+        items[(nextLast - 1 + items.length) % capacity] = null;
         nextLast = (nextLast - 1 + items.length) % capacity;
         size--;
+        double radio = size / capacity;
+        if (capacity > 16 && radio < 0.25) {
+            int newcapcity = capacity / 2;
+            resize(newcapcity);
+        }
         return res;
     }
 

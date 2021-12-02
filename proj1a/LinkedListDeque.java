@@ -88,14 +88,14 @@ public class LinkedListDeque<T> {
         return getRecursive(sentinel.next, index);
     }
 
-    public T getRecursive(LinkedListDeque<T>.IntNode node, int index) {
+    private T getRecursive(LinkedListDeque<T>.IntNode node, int index) {
         if (index == 0) {
             return node.item;
         }
         return getRecursive(node.next, index - 1);
     }
 
-    public class IntNode {
+    private class IntNode {
         public IntNode pre;
         public T item;
         public IntNode next;
