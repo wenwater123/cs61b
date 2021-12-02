@@ -40,7 +40,7 @@ public class ArrayDeque<T> {
     }
 
     private boolean isfull() {
-        if (size == items.length) {
+        if (size == items.length-3) {
             return true;
         }
         return false;
@@ -116,6 +116,29 @@ public class ArrayDeque<T> {
         }
         items = newitem;
     }
-
-
+//    public static void main(String[] args) {
+//        ArrayDeque a = new ArrayDeque();
+//        a.addFirst(0);
+//        a.addFirst(1);
+//        a.addLast(2);
+//        a.addFirst(3);
+//        a.addLast(4);
+//        a.removeLast();
+//        a.get(3);
+//        a.addLast(7);
+//        a.get(0);
+//        a.addLast(9);
+//        a.removeFirst();
+//        a.addLast(11);
+//        a.removeFirst();
+//        a.addLast(13);
+//        a.addFirst(14);
+//        a.addFirst(15);
+//        a.addFirst(66);
+//        System.out.print(a.size);
+////        a.printDeque();
+//        System.out.print(a.removeFirst());
+//    }
 }
+
+
