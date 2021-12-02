@@ -59,9 +59,9 @@ public class ArrayDeque<T> {
         if (isEmpty()) {
             return null;
         }
-        T res = items[(nextFirst + 1) % capacity];
-        items[(nextFirst + 1) % capacity] = null;
-        nextFirst = (nextFirst + 1 + items.length) % capacity;
+        T res = items[(nextFirst + 1) % items.length];
+        items[(nextFirst + 1) % items.length] = null;
+        nextFirst = (nextFirst + 1 + items.length) % items.length;
         size--;
         double radio = (double) size / capacity;
         if (capacity > 16 && radio < 0.25) {
@@ -75,9 +75,9 @@ public class ArrayDeque<T> {
         if (isEmpty()) {
             return null;
         }
-        T res = items[(nextLast - 1 + items.length) % capacity];
-        items[(nextLast - 1 + items.length) % capacity] = null;
-        nextLast = (nextLast - 1 + items.length) % capacity;
+        T res = items[(nextLast - 1 + items.length) % items.length];
+        items[(nextLast - 1 + items.length) % items.length] = null;
+        nextLast = (nextLast - 1 + items.length) % items.length;
         size--;
         double radio = (double)size / capacity;
         if (capacity > 16 && radio < 0.25) {
@@ -91,7 +91,7 @@ public class ArrayDeque<T> {
         if (size <= index) {
             return null;
         }
-        return items[(nextFirst + index + 1) % capacity];
+        return items[(nextFirst + index + 1) % items.length];
     }
 
 
