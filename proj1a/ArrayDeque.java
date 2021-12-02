@@ -38,7 +38,7 @@ public class ArrayDeque<T> {
     }
 
     private boolean isfull() {
-        return size == capacity - 1;
+        return size == capacity;
     }
 
     public int size() {
@@ -63,7 +63,7 @@ public class ArrayDeque<T> {
         items[(nextFirst + 1) % capacity] = null;
         nextFirst = (nextFirst + 1 + items.length) % capacity;
         size--;
-        double radio = size / capacity;
+        double radio = (double) size / capacity;
         if (capacity > 16 && radio < 0.25) {
             int newcapcity = capacity / 2;
             resize(newcapcity);
@@ -79,7 +79,7 @@ public class ArrayDeque<T> {
         items[(nextLast - 1 + items.length) % capacity] = null;
         nextLast = (nextLast - 1 + items.length) % capacity;
         size--;
-        double radio = size / capacity;
+        double radio = (double)size / capacity;
         if (capacity > 16 && radio < 0.25) {
             int newcapcity = capacity / 2;
             resize(newcapcity);
