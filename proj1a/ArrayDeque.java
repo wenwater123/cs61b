@@ -3,11 +3,10 @@ public class ArrayDeque<T> {
     private int size;
     private int nextFirst;
     private int nextLast;
-    private int capacity = 8;
     private int bigRFACTOR = 2;
 
     public ArrayDeque() {
-        items = (T[]) new Object[capacity];
+        items = (T[]) new Object[8];
         nextFirst = 0;
         nextLast = 1;
         size = 0;
@@ -18,7 +17,7 @@ public class ArrayDeque<T> {
         nextFirst = (nextFirst - 1 + items.length) % items.length;
         size += 1;
         if (isfull()) {
-            int newcap = capacity * bigRFACTOR;
+            int newcap = size * bigRFACTOR;
             resize(newcap);
         }
     }
@@ -28,7 +27,7 @@ public class ArrayDeque<T> {
         nextLast = (nextLast + 1) % items.length;
         size += 1;
         if (isfull()) {
-            int newcap = capacity * bigRFACTOR;
+            int newcap = size * bigRFACTOR;
             resize(newcap);
         }
     }
@@ -41,7 +40,7 @@ public class ArrayDeque<T> {
     }
 
     private boolean isfull() {
-        if (size == capacity) {
+        if (size == items.length) {
             return true;
         }
         return false;
@@ -52,7 +51,7 @@ public class ArrayDeque<T> {
     }
 
     public void printDeque() {
-        for (int i = nextFirst; i < nextLast; i = (i + 1) / capacity) {
+        for (int i = nextFirst; i < nextLast; i = (i + 1) / items.length) {
             if (i == nextLast - 1) {
                 System.out.print(items[i]);
                 break;
@@ -69,8 +68,8 @@ public class ArrayDeque<T> {
         items[(nextFirst + 1) % items.length] = null;
         nextFirst = (nextFirst + 1 ) % items.length;
         size--;
-        if (capacity > 16 && size < (items.length / 4)) {
-            int newcapcity = capacity / 2;
+        if (items.length > 16 && size < (items.length / 4)) {
+            int newcapcity = items.length / 2;
             resize(newcapcity);
         }
         return res;
@@ -84,8 +83,8 @@ public class ArrayDeque<T> {
         items[(nextLast - 1 + items.length) % items.length] = null;
         nextLast = (nextLast - 1 + items.length) % items.length;
         size--;
-        if (capacity > 16 && size < (items.length / 4)) {
-            int newcapcity = capacity / 2;
+        if (items.length > 16 && size < (items.length / 4)) {
+            int newcapcity = items.length / 2;
             resize(newcapcity);
         }
         return res;
@@ -108,14 +107,13 @@ public class ArrayDeque<T> {
             nextFirst = 0;
             nextLast = length+1;
         } else {
-            int length1 = capacity - nextFirst - 1;
+            int length1 = items.length - nextFirst - 1;
             int length2 = nextLast;
             System.arraycopy(items, nextFirst + 1, newitem, 1, length1);
             System.arraycopy(items, 0, newitem, length1 + 1, length2);
             nextLast = length1 + length2+1;
             nextFirst = 0;
         }
-        capacity = newSize;
         items = newitem;
     }
 
