@@ -34,11 +34,17 @@ public class ArrayDeque<T> {
     }
 
     public boolean isEmpty() {
-        return size == 0;
+        if (size == 0) {
+            return true;
+        }
+        return false;
     }
 
     private boolean isfull() {
-        return size == capacity;
+        if (size == capacity) {
+            return true;
+        }
+        return false;
     }
 
     public int size() {
@@ -88,7 +94,7 @@ public class ArrayDeque<T> {
     }
 
     public T get(int index) {
-        if (index <= size ) {
+        if (size <= index ) {
             return null;
         }
         return items[(nextFirst + index + 1) % items.length];
