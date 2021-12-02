@@ -4,12 +4,12 @@ public class ArrayDeque<T> {
     private int nextFirst;
     private int nextLast;
     private int capacity = 8;
-    private final int bigRFACTOR = 2;
+    private int bigRFACTOR = 2;
 
     public ArrayDeque() {
         items = (T[]) new Object[capacity];
-        nextFirst = 4;
-        nextLast = 5;
+        nextFirst = 0;
+        nextLast = 1;
         size = 0;
     }
 
@@ -67,10 +67,9 @@ public class ArrayDeque<T> {
         }
         T res = items[(nextFirst + 1) % items.length];
         items[(nextFirst + 1) % items.length] = null;
-        nextFirst = (nextFirst + 1 + items.length) % items.length;
+        nextFirst = (nextFirst + 1 ) % items.length;
         size--;
-        double radio = (double) size / capacity;
-        if (capacity > 16 && radio < 0.25) {
+        if (capacity > 16 && size < (items.length / 4)) {
             int newcapcity = capacity / 2;
             resize(newcapcity);
         }
@@ -85,8 +84,7 @@ public class ArrayDeque<T> {
         items[(nextLast - 1 + items.length) % items.length] = null;
         nextLast = (nextLast - 1 + items.length) % items.length;
         size--;
-        double radio = (double)size / capacity;
-        if (capacity > 16 && radio < 0.25) {
+        if (capacity > 16 && size < (items.length / 4)) {
             int newcapcity = capacity / 2;
             resize(newcapcity);
         }
