@@ -1,5 +1,3 @@
-import static org.junit.Assert.assertFalse;
-
 public class Palindrome {
     public Deque<Character> wordToDeque(String word) {
         Deque a = new LinkedListDeque();
@@ -18,7 +16,7 @@ public class Palindrome {
         return helper(q);
     }
 
-    public boolean helper(Deque q) {
+    private boolean helper(Deque q) {
         Object a = q.removeFirst();
         Object b = q.removeLast();
         if (a != b) {
